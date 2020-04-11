@@ -1,8 +1,9 @@
 <template>
     <Page>
-      <ActionBar title="TO DO LIST">
+      <ActionBar title="LIST">
         <ActionItem text="ADD" @tap="onAddTap"></ActionItem>
         <ActionItem :text="filterButtonText" @tap="toggleFilter"></ActionItem>
+        <ActionItem text="DELETE ALL"  @tap="onDeleteAllTap"></ActionItem>
       </ActionBar>
       <StackLayout>
         <GroceryList :items="items" :filterDone="filterDone" @updateItems="saveToLocalStorage"/>
@@ -43,6 +44,12 @@
       },
       saveToLocalStorage() {
           localStorage.setItem("data", JSON.stringify(this.items));
+      },
+      onDeleteAllTap() {
+        for (const item of this.items) {
+          item.deleted=true;
+          this.saveToLocalStorage();
+        }
       }
     },
     created: function() {
@@ -52,7 +59,7 @@
     },
     computed: {
       filterButtonText: function() {
-        if(this.filterDone){ return "SHOW ALL TASKS" }
+        if(this.filterDone){ return "SHOW ALL" }
         else{ return "ONLY NOT DONE" }
       }
     }

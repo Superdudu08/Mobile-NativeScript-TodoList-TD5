@@ -5,7 +5,10 @@
 * `npm install` pour installer les dépendances
 * `tns run` pour lancer l\'application
 
+## Commentaires
 
-`tns resources generate icons  app/assets/images/appicon.png`  a été utilisé pour générer l'icone
+* Les images stockées sur imgBB ne sont parfois pas chargées au lancement de l'application mais uniquement une fois que l'utilisateur éxécute une première action. De plus, le chargement de celles-ci est parfois trop long.
 
-`tns resources generate splashes  app/assets/images/todoSplashes.png` a été utilisé pour générer le splash screen
+* `tns resources generate icons  app/assets/images/appicon.png`  a été utilisé pour générer l'icone
+
+* `tns resources generate splashes  app/assets/images/todoSplashes.png` a été utilisé pour générer le splash screen

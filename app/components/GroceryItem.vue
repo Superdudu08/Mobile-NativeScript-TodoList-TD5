@@ -1,11 +1,12 @@
 <template>
     <StackLayout>
-        <GridLayout columns="100,*,40" rows="60">
+        <GridLayout columns="100,60,*,40" rows="60">
             <Label col="0" :text="statusText" @tap="onDoneTap" class="statusDone" :class="{ 'toDoDone' : groceryItem.done }"></Label>
-            <Label col="1" class="item-name" :class="{ 'line-through' : groceryItem.done }" :text="groceryItem.name" @tap="onNameTap"></Label>
-            <Label col="2" @tap="onDeleteTap" text="🗑️" class="deleteButton"></Label> 
+            <Image col="1" v-if='groceryItem.imgUrl != ""'  :src="groceryItem.imgUrl"/>
+            <Label col="2" class="item-name" :class="{ 'line-through' : groceryItem.done }" :text="groceryItem.name" @tap="onNameTap"></Label>
+            <Label col="3" v-if='groceryItem.done' @tap="onDeleteTap" text="🗑️" class="deleteButton"></Label> 
         </GridLayout>
-    <Image v-if='groceryItem.imgUrl != ""' :src="groceryItem.imgUrl" width="300" height="200"/>
+    
     </StackLayout>
 </template>
 
