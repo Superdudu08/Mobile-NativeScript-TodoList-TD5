@@ -7,10 +7,16 @@
             <Button text="Back" @tap="onBackTap"></Button>
             <Button :text="statusText" @tap='toggle'></Button>
             <Button text="Take picture" @tap='takePicture'></Button>
+            
+            <!-- On affiche l'image déja existante pour la TODO -->
+            <Image v-if='image==null' :src="originalUrlPicture" width="300" height="200"/>
+
             <Image v-if='image!=null' :src="image.src" width="300" height="200" @tap="saveImage()"/>
+            <Label v-if='image!=null && !successUpload && !upload' text="Tap the picture to save"></Label>
+            <!-- Affichage pendant l'upload -->
             <Label v-if='upload' text="Saving the picture..."></Label>
             <Progress v-if="upload" v-bind:value="progress" maxValue="100" color="pink"></Progress>
-            <Label v-if='image!=null && !successUpload && !upload' text="Tap the picture to save"></Label>
+            
             <Label v-if='successUpload' text="Picture successfully saved"></Label>
         </StackLayout>
     </Page>
@@ -30,7 +36,8 @@ export default {
            image: null,
            upload:false,
            progress: 0,
-           successUpload:false
+           successUpload:false,
+           originalUrlPicture: this.groceryItem.imgUrl
         }
     },
     computed: {
