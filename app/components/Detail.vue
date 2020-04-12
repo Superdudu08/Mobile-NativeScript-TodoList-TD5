@@ -3,7 +3,7 @@
         <ActionBar title="Details">
         </ActionBar>
         <StackLayout>
-            <Label :text="groceryItem.name"></Label>
+            <Label :text="todoItem.name"></Label>
             <Button text="Back" @tap="onBackTap"></Button>
             <Button :text="statusText" @tap='toggle'></Button>
             <Button text="Take picture" @tap='takePicture'></Button>
@@ -30,24 +30,24 @@ const bghttp = require("nativescript-background-http");
 const session = bghttp.session("image-upload");
 
 export default {
-    props: ['groceryItem'],
+    props: ['todoItem'],
     data: function() {
         return {
            image: null,
            upload:false,
            progress: 0,
            successUpload:false,
-           originalUrlPicture: this.groceryItem.imgUrl
+           originalUrlPicture: this.todoItem.imgUrl
         }
     },
     computed: {
         statusText: function() {
-            return this.groceryItem.done ? 'Done' : 'Not done';
+            return this.todoItem.done ? 'Done' : 'Not done';
         }
     },
     methods: {
         toggle: function() {
-           this.groceryItem.done = !this.groceryItem.done;
+           this.todoItem.done = !this.todoItem.done;
         },
         onBackTap : function() {
             this.$navigateBack();
@@ -95,7 +95,7 @@ export default {
                 this.successUpload = true;
                 let result = JSON.parse(res.data);
                 let urlImageUploaded = result.data.image.url;
-                this.groceryItem.imgUrl = urlImageUploaded;
+                this.todoItem.imgUrl = urlImageUploaded;
             });
         }
     }

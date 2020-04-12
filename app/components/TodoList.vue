@@ -1,31 +1,31 @@
 <template>
     <ListView for="item in filteredItems">
         <v-template>
-            <GroceryItem :groceryItem="item" @doneTap="onToggleDone" @nameTap="onItemTap" @deleteTap="onDeleteTap"></GroceryItem>
+            <TodoItem :todoItem="item" @doneTap="onToggleDone" @nameTap="onItemTap" @deleteTap="onDeleteTap"></TodoItem>
         </v-template>
     </ListView>
 </template>
 
 <script > 
-    import GroceryItem from "./GroceryItem";
+    import TodoItem from "./TodoItem";
     import Detail from './Detail';
     
 
   export default {
-    components: {GroceryItem, Detail},
+    components: {TodoItem, Detail},
     props: ['items','filterDone'],
     methods: {
-        onToggleDone(groceryItem) {
-            const newItem = Object.assign(groceryItem, { done: !groceryItem.done});
+        onToggleDone(todoItem) {
+            const newItem = Object.assign(todoItem, { done: !todoItem.done});
 
-            const idx = this.items.findIndex(i => i.id === groceryItem.id);
+            const idx = this.items.findIndex(i => i.id === todoItem.id);
 
             this.items = Object.assign( [], this.items, { idx: newItem});
         },
         onItemTap(args) {
             this.$navigateTo(Detail, {
                 props: {
-                    groceryItem: args
+                    todoItem: args
                 },
                 transitionAndroid: {
                     name:"slide",
@@ -34,9 +34,9 @@
                 }
             });
         },
-        onDeleteTap(groceryItem) {
-            if(groceryItem.done){
-                groceryItem.deleted=true;
+        onDeleteTap(todoItem) {
+            if(todoItem.done){
+                todoItem.deleted=true;
                 this.$emit('updateItems');
             }
         }

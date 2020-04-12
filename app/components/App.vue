@@ -6,19 +6,19 @@
         <ActionItem text="DELETE ALL"  @tap="onDeleteAllTap"></ActionItem>
       </ActionBar>
       <StackLayout>
-        <GroceryList :items="items" :filterDone="filterDone" @updateItems="saveToLocalStorage"/>
+        <TodoList :items="items" :filterDone="filterDone" @updateItems="saveToLocalStorage"/>
       </StackLayout>
     </Page>
 </template>
 
 <script > 
-  import GroceryList from "./GroceryList";
+  import TodoList from "./TodoList";
   import AddItem from './AddItem';
   import * as localstorage from 'nativescript-localstorage';
 
 
   export default {
-    components: {GroceryList},
+    components: {TodoList},
     data() {
       return {
         items: [],
